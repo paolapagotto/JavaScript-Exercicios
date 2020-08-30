@@ -1,3 +1,7 @@
+const json = require('./json');
+//JSON - importando (deve estar na mesma pasta do file.)
+
+
 //DESAFIO
 
 //função para verificar animais vacinados e os que precisam de vacina.
@@ -55,18 +59,19 @@ let novoPet = {
 var petsVacinados = [];
 var petsNaoVacinados = [];
 
-/*
+
 function validaPet(novoPet){
-    return (novoPet.nome != 'undefined' && 
+    return (novoPet.nome && 
     novoPet.tipo && 
     novoPet.raca && 
-    novoPet.idade && 
+    typeof novoPet.idade == "number" &&
     novoPet.genero && 
     typeof novoPet.vacinado == "boolean");
 } 
+
 function cadastrarPet(petsLista, novoPet) {
     if(typeof novoPet == "object"){
-      if(validaDados(novoPet)){
+      if(validaPet(novoPet)){
         petsLista.push(novoPet)
         console.log(petsLista)
       } else {
@@ -75,14 +80,7 @@ function cadastrarPet(petsLista, novoPet) {
     } else{ 
       console.log("Insira um objeto válido")
     }
-} */
-
-/*
-function cadastrarNovosdePets(petsLista, novosPets){
-    for(let i = 0; i < novosPets.length; i++){
-        petsLista.push(novosPets[i]);
-    } 
-} */
+} 
 
 function verificaAnimaisVacinados(petsLista){
     for(var i = 0; i < petsLista.length; i++){
@@ -116,6 +114,55 @@ function encontrarPet(petsLista, nomePet){
     return nomePet + ' não está cadastrado.';
 }
 
+//Desafio criar uma função callback chamada serviços
+//como parametro vai receber o pet da lista e o servico
+//os servicos são dar banho no pet ou tosar o pet
+
+
+function banhoPet(petsLista, petsBanho, nomePet){
+    
+    for(let i = 0; i < petsLista.length; i++){
+        if(petsLista[i].nome == nomePet){
+          petsBanho.push(nomePet);
+          return "O pet " + nomePet + " está tomando banho."; 
+        } 
+    }
+    return nomePet + ' não está cadastrado.';
+}
+
+
+function tosaPet(petsLista, petsTosa, nomePet){
+    for(let i = 0; i < petsLista.length; i++){
+        if(petsLista[i].nome == nomePet){
+            petsTosa.push(nomePet);
+          return "O pet " + nomePet + " está sendo tosado."; 
+        } 
+    }
+    return nomePet + ' não está cadastrado.';
+}
+
+function servicoPet(petsLista, petsServico, nomePet, servico){
+    return servico(petsLista, petsServico, nomePet);
+}
+
+
+function cadastrarNovosPets(petsLista, novosPets){ 
+    var novosPetsObj = JSON.parse(novosPets)   
+    petsLista.push(...novosPetsObj); //spread operator
+    return petsLista;
+}
+
+
+console.log(servicoPet(pets,'Drogo', banhoPet));
+console.log(petsBanho);
+
+
+console.log(json);
+
+cadastrarPet(pets, novoPet); 
+
+console.log(cadastrarNovosPets(pets, json));
+
 console.log('\nLista completa: ');
 let verificados = verificaAnimaisVacinados(pets);
 
@@ -128,52 +175,3 @@ console.log(nv);
 console.log('\nVerifica pet por nome: ');
 let petVacinado = encontrarPet(pets, 'Drogo');
 console.log(petVacinado);
-
-
-//Desafio criar uma função callback chamada serviços
-//como parametro vai receber o pet da lista e o servico
-//os servicos são dar banho no pet ou tosar o pet
-
-var petsBanho = [];
-function banhoPet(petsLista, nomePet){
-    
-    for(let i = 0; i < petsLista.length; i++){
-        if(petsLista[i].nome == nomePet){
-          petsBanho.push(nomePet);
-          return "O pet " + nomePet + " está tomando banho."; 
-        } 
-    }
-    return nomePet + ' não está cadastrado.';
-}
-var petsTosa =[];
-function tosaPet(petsLista, nomePet){
-    
-    for(let i = 0; i < petsLista.length; i++){
-        if(petsLista[i].nome == nomePet){
-            petsTosa.push(nomePet);
-          return "O pet " + nomePet + " está sendo tosado."; 
-        } 
-    }
-    return nomePet + ' não está cadastrado.';
-}
-function servicoPet(petsLista, nomePet, servico){
-    return servico(petsLista, nomePet);
-}
-
-//console.log(servicoPet(pets,'Drogo', banhoPet));
-//console.log(petsBanho);
-
-
-//JSON - importando (deve estar na mesma pasta do file.)
-
-const json = require('./json');
-//console.log(json);
-
-
-function cadastrarNovosdePets(petsLista, novosPets){ 
-    var novosPetsObj = JSON.parse(novosPets)   
-    petsLista.push(...novosPetsObj); //spread operator
-    return petsLista;
-}
-
-console.log(cadastrarNovosdePets(pets, json));

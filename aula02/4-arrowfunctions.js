@@ -9,6 +9,8 @@ function somar(a, b){
 
 let somar = (a, b) => a + b;
 
+
+
 let dobro = a => a * 2;
 
 // O operador flecha substitui a palavra reservada function
