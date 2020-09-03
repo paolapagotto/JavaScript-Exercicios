@@ -39,4 +39,6 @@ let {name, age} = person;
 
 let destinosIncriveis = ['Marruecos', 'Bariloche', 'Barcelona', 'China', 'Grecia'];
 let [city1, city2, city3, city4, city5] = destinosIncriveis;
-console.log(city2,city4);
+console.log(city2,city4); 
+
+novalinha
