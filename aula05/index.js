@@ -14,8 +14,7 @@ const {
     somar,
     subtrair,
     dividir,
-    multiplicar,
-} = require('./calculadora')
+    multiplicar,} = require('./calculadora')
 
 
 let pets = [
