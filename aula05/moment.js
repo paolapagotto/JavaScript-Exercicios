@@ -13,7 +13,21 @@ console.log(moment(). format('DD/MM/YYYY'));
 console.log(moment(). format('DD MM YYYY HH:mm'));
 
 //Desafio
-//Trazer a diferenca de dias entre 15/09/2005 e 15/05/2020
+//Trazer a diferenca de dias entre 15/09/2005 e 15/09/2020
 //a quantidade de dias E meses entre essas datas
 //utilizando a biblioteca moment e a biblioteca date fns 
 
+
+const pastDate = moment("2005-09-15");
+const presentDate = moment("2020-09-15");
+const duration = moment.duration(presentDate.diff(pastDate));
+
+const days = duration.asDays();
+const months = Math.ceil(duration.asMonths());
+
+
+console.log(days);
+console.log(months);
+
+console.log("A diferença entre as datas é de: " + days + " dias.");
+console.log("A diferença entre as datas é de: " + months + " meses.");
